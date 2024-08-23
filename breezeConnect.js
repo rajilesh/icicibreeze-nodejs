@@ -914,9 +914,15 @@ var BreezeConnect = function(params) {
                 return res;
             }
             else if(method === apiRequest.DELETE) {
-                res = axios.delete(url=url, data=body, {headers:header})
-                    .then((resp)=>{return resp});
-                return res;
+                     res = await axios(
+                    {
+                        method:'delete',
+                        url:url,
+                        data:body,
+                        headers:header
+                    }
+                    ).then((resp)=>{return resp})
+            return res;
             }
         } catch (error) {
             self.errorException(exceptionMessage.API_REQUEST_EXCEPTION.format(method,url), error);
